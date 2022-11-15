@@ -1,0 +1,309 @@
+# Copyright (C) 2022 Christian Wach
+# This file is distributed under the same license as the Football Poets Poems plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: Football Poets Poems 0.2.4\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/poets-poems\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2022-11-11T21:22:41+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.7.0\n"
+"X-Domain: poets-poems\n"
+
+#. Plugin Name of the plugin
+msgid "Football Poets Poems"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "http://footballpoets.org"
+msgstr ""
+
+#. Description of the plugin
+msgid "Creates a \"Poems\" Custom Post Type for the Football Poets site."
+msgstr ""
+
+#. Author of the plugin
+msgid "Christian Wach"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://haystack.co.uk"
+msgstr ""
+
+msgid "Poems"
+msgstr ""
+
+msgid "Poem"
+msgstr ""
+
+msgid "Add New"
+msgstr ""
+
+msgid "Add New Poem"
+msgstr ""
+
+msgid "Edit Poem"
+msgstr ""
+
+msgid "New Poem"
+msgstr ""
+
+msgid "All Poems"
+msgstr ""
+
+msgid "View Poem"
+msgstr ""
+
+msgid "Search Poems"
+msgstr ""
+
+msgid "No matching Poem found"
+msgstr ""
+
+msgid "No Poems found in Trash"
+msgstr ""
+
+msgid "Published a new poem"
+msgstr ""
+
+msgid "%1$s published a <a href=\"%2$s\">poem</a>"
+msgstr ""
+
+msgid "%1$s published a <a href=\"%2$s\">poem</a> on %3$s"
+msgstr ""
+
+msgid "Comments on poems"
+msgstr ""
+
+msgid "%1$s commented on a <a href=\"%2$s\">poem</a>"
+msgstr ""
+
+msgid "%1$s commented on a <a href=\"%2$s\">poem</a> on %3$s"
+msgstr ""
+
+msgid "A poem post type"
+msgstr ""
+
+#. translators: %s: The URL of the Post.
+msgid "Poem updated. <a href=\"%s\">View poem</a>"
+msgstr ""
+
+msgid "Custom field updated."
+msgstr ""
+
+msgid "Custom field deleted."
+msgstr ""
+
+msgid "Poem updated."
+msgstr ""
+
+#. Translators: %s: date and time of the revision.
+msgid "Poem restored to revision from %s"
+msgstr ""
+
+#. translators: %s: The URL of the Poem.
+msgid "Poem published. <a href=\"%s\">View poem</a>"
+msgstr ""
+
+msgid "Poem saved."
+msgstr ""
+
+#. translators: %s: The preview URL.
+msgid "Poem submitted. <a target=\"_blank\" href=\"%s\">Preview poem</a>"
+msgstr ""
+
+#. translators: 1: The Post date, 2: The permalink.
+msgid "Poem scheduled for: <strong>%1$s</strong>. <a target=\"_blank\" href=\"%2$s\">Preview poem</a>"
+msgstr ""
+
+#. translators: Publish box date format, see https://php.net/date
+msgid "M j, Y @ G:i"
+msgstr ""
+
+#. translators: %s: The preview URL.
+msgid "Poem draft updated. <a target=\"_blank\" href=\"%s\">Preview poem</a>"
+msgstr ""
+
+msgctxt "taxonomy general name"
+msgid "Poem Types"
+msgstr ""
+
+msgctxt "taxonomy singular name"
+msgid "Poem Type"
+msgstr ""
+
+msgid "Search Poem Types"
+msgstr ""
+
+msgid "All Poem Types"
+msgstr ""
+
+msgid "Parent Poem Type"
+msgstr ""
+
+msgid "Parent Poem Type:"
+msgstr ""
+
+msgid "Edit Poem Type"
+msgstr ""
+
+msgid "Update Poem Type"
+msgstr ""
+
+msgid "Add New Poem Type"
+msgstr ""
+
+msgid "New Poem Type Name"
+msgstr ""
+
+msgid "Poem Types"
+msgstr ""
+
+msgctxt "taxonomy general name"
+msgid "Poem Tags"
+msgstr ""
+
+msgctxt "taxonomy singular name"
+msgid "Poem Tag"
+msgstr ""
+
+msgid "Search Poem Tags"
+msgstr ""
+
+msgid "All Poem Tags"
+msgstr ""
+
+msgid "Parent Poem Tag"
+msgstr ""
+
+msgid "Parent Poem Tag:"
+msgstr ""
+
+msgid "Edit Poem Tag"
+msgstr ""
+
+msgid "Update Poem Tag"
+msgstr ""
+
+msgid "Add New Poem Tag"
+msgstr ""
+
+msgid "New Poem Tag"
+msgstr ""
+
+msgid "Poem Tags"
+msgstr ""
+
+#. translators: %s: The name of the taxonomy.
+msgid "Show All %s"
+msgstr ""
+
+msgid "verse"
+msgstr ""
+
+#. translators: 1: The name of the author, 2: The URL of the Post, 3: The name of the site.
+msgid "%1$s published a <a href=\"%2$s\">poem</a> on the site %3$s"
+msgstr ""
+
+msgid "Legacy Info"
+msgstr ""
+
+msgid "Poem Author"
+msgstr ""
+
+msgid "Poem Notes"
+msgstr ""
+
+msgid "Review Comments (not shown)"
+msgstr ""
+
+msgid "School Information (not shown)"
+msgstr ""
+
+msgid "Competition Information (not shown)"
+msgstr ""
+
+#. translators: %s: The original database ID.
+msgid "Original database ID: %d"
+msgstr ""
+
+msgid "Author Name"
+msgstr ""
+
+msgid "Author Email"
+msgstr ""
+
+msgid "Copyright"
+msgstr ""
+
+msgid "School Name"
+msgstr ""
+
+msgid "Teacher Name"
+msgstr ""
+
+msgid "Teacher Email"
+msgstr ""
+
+msgid "Competition Name"
+msgstr ""
+
+msgid "Choose New"
+msgstr ""
+
+msgid "Choose Featured Poem"
+msgstr ""
+
+msgid "Set Featured Poem"
+msgstr ""
+
+msgid "jS F Y"
+msgstr ""
+
+msgid "Be the first to leave a comment &#187;"
+msgstr ""
+
+msgid "1 Comment &#187;"
+msgstr ""
+
+msgid "% Comments &#187;"
+msgstr ""
+
+msgid "Notes"
+msgstr ""
+
+#. translators: 1: The title of the Poem, 2: The name of the Poet.
+msgid "Featured Poem &amp; Image: %1$s by %2$s"
+msgstr ""
+
+msgid "Use this widget to show the poem in the \"Featured\" category."
+msgstr ""
+
+msgid "Featured Poem"
+msgstr ""
+
+msgid "Title:"
+msgstr ""
+
+msgid "Use this widget to show a list of the latest poems."
+msgstr ""
+
+msgid "Latest Poems"
+msgstr ""
+
+msgid "Read all recent poems"
+msgstr ""
+
+msgid "Use this widget to show the total number of poems."
+msgstr ""
+
+msgid "Total Poems"
+msgstr ""
+
+#. translators: %d: The number of Poems.
+msgid "There are currently <strong>%d</strong> poems on this site."
+msgstr ""
