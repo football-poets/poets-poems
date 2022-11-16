@@ -433,6 +433,22 @@ class Poets_Poems_Switcher {
 			return $content;
 		}
 
+		// Get the ID of the Front Page.
+		$front_page_id = get_option( 'page_on_front' );
+		if ( empty( $front_page_id ) ) {
+			return $content;
+		}
+
+		// Bail if this is not the Front Page.
+		if ( (int) $front_page_id !== (int) get_the_ID() ) {
+			return $content;
+		}
+
+		// Bail if the token isn't present.
+		if ( false === strpos( $content, '<!--featured-->' ) ) {
+			return $content;
+		}
+
 		// Get Featured Poem teaser.
 		$teaser = $this->get_teaser_markup();
 
