@@ -91,7 +91,7 @@ class Poets_Poems_CPT {
 		add_filter( 'template_include', [ $this, 'search_template' ] );
 
 		// Add to BuddyPress member search - add it late so the sort is most effective.
-		add_filter( 'bp_search_form_type_select_options', [ $this, 'search_form_options' ], 20, 1 );
+		add_filter( 'bp_search_form_type_select_options', [ $this, 'search_form_options' ], 30, 1 );
 
 		// Intercept BuddyPress search.
 		add_action( 'bp_init', [ $this, 'search_redirect' ], 6 );
@@ -741,11 +741,8 @@ class Poets_Poems_CPT {
 		if ( ! is_array( $options ) ) {
 			$options = [ $this->post_type_name => $text ];
 		} else {
-			$options[ $this->post_type_name ] = $text;
+			$options = [  $this->post_type_name => $text ] + $options;
 		}
-
-		// Sort it so Poems come before posts.
-		ksort( $options );
 
 		// --<
 		return $options;
