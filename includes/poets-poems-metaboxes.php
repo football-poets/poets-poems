@@ -521,7 +521,7 @@ class Poets_Poems_Metaboxes {
 
 		// Save notes.
 		$db_key = '_' . $this->content_notes_meta_key;
-		$value = isset( $_POST[ $this->content_notes_meta_key ] ) ? sanitize_text_field( wp_unslash( $_POST[ $this->content_notes_meta_key ] ) ) : '';
+		$value = isset( $_POST[ $this->content_notes_meta_key ] ) ? sanitize_textarea_field( wp_unslash( $_POST[ $this->content_notes_meta_key ] ) ) : '';
 		$this->save_meta( $post, $db_key, $value );
 
 	}
