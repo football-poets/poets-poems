@@ -5,7 +5,7 @@
  * Plugin Name: Football Poets Poems
  * Description: Creates a "Poems" Custom Post Type for the Football Poets site.
  * Plugin URI:  https://github.com/football-poets/poets-poems
- * Version:     0.3.0a
+ * Version:     0.3.0
  * Author:      Christian Wach
  * Author URI:  https://haystack.co.uk
  * Text Domain: poets-poems
@@ -18,7 +18,7 @@
 defined( 'ABSPATH' ) || exit;
 
 // Set our version here.
-define( 'POETS_POEMS_VERSION', '0.3.0a' );
+define( 'POETS_POEMS_VERSION', '0.3.0' );
 
 // Store reference to this file.
 if ( ! defined( 'POETS_POEMS_FILE' ) ) {
