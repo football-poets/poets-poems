@@ -83,6 +83,7 @@ class Poets_Poems_CPT {
 		// Filter activity items.
 		add_action( 'bp_activity_before_save', [ $this, 'filter_post_activity' ], 20, 1 );
 		add_filter( 'bp_activity_custom_post_type_post_action', [ $this, 'filter_post_activity_action' ], 20, 2 );
+		add_action( 'bp_activity_before_save', [ $this, 'filter_comment_activity' ], 20, 1 );
 
 		// Tweak the query for search.
 		add_action( 'pre_get_posts', [ $this, 'search_query' ], 100, 1 );
@@ -526,7 +527,7 @@ class Poets_Poems_CPT {
 
 		// Only on new Poems.
 		if ( 'new_' . $this->post_type_name !== $activity->type ) {
-			return $activity;
+			return;
 		}
 
 		// Get Poem.
@@ -535,6 +536,16 @@ class Poets_Poems_CPT {
 
 		// Replace the primary link.
 		$activity->primary_link = get_permalink( $poem->ID );
+
+		$bp_excerpt_args = [
+			'html'              => true,
+			'filter_shortcodes' => true,
+			'strip_tags'        => false,
+			'remove_links'      => true,
+		];
+
+		// Reinstate formatted content.
+		$activity->content = bp_create_excerpt( html_entity_decode( $poem->post_content ), 225, $bp_excerpt_args );
 
 	}
 
@@ -633,6 +644,36 @@ class Poets_Poems_CPT {
 
 		// --<
 		return $action;
+
+	}
+
+	/**
+	 * Filter the Poem Comment activity item before it gets saved.
+	 *
+	 * @since 0.3.1
+	 *
+	 * @param object $activity The existing activity object.
+	 */
+	public function filter_comment_activity( $activity ) {
+
+		// Only on new Poem Comments.
+		if ( 'new_' . $this->post_type_name . '_comment' !== $activity->type ) {
+			return;
+		}
+
+		// Get the Comment.
+		$comment_id = $activity->secondary_item_id;
+		$comment    = get_comment( $comment_id );
+
+		$bp_excerpt_args = [
+			'html'              => true,
+			'filter_shortcodes' => true,
+			'strip_tags'        => false,
+			'remove_links'      => true,
+		];
+
+		// Reinstate formatted content.
+		$activity->content = bp_create_excerpt( html_entity_decode( $comment->comment_content ), 225, $bp_excerpt_args );
 
 	}
 
