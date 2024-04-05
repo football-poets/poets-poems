@@ -21,20 +21,29 @@ defined( 'ABSPATH' ) || exit;
 class Poets_Poems_Switcher {
 
 	/**
-	 * Plugin (calling) object.
+	 * Plugin object.
 	 *
 	 * @since 0.2.2
 	 * @access public
-	 * @var object $plugin The plugin object.
+	 * @var Poets_Poems
 	 */
 	public $plugin;
+
+	/**
+	 * Form nonce action.
+	 *
+	 * @since 0.2.5
+	 * @access private
+	 * @var string
+	 */
+	private $nonce_action = 'poets_poems_switcher_nonce';
 
 	/**
 	 * Constructor.
 	 *
 	 * @since 0.2.1
 	 *
-	 * @param object $parent The plugin object.
+	 * @param Poets_Poems $parent The plugin object.
 	 */
 	public function __construct( $parent ) {
 
@@ -79,16 +88,19 @@ class Poets_Poems_Switcher {
 		}
 
 		// Add a button.
-		echo ' <a href="#" class="poem-switcher" style="float: right; text-decoration: none;">' . __( 'Choose New', 'poets-poems' ) . '</a>';
+		echo ' <a href="#" class="poem-switcher" style="float: right; text-decoration: none;">' . esc_html__( 'Choose New', 'poets-poems' ) . '</a>';
 
 		// Add a hidden text field.
 		echo '<input type="text" style="display: none !important;" id="poem-switcher-field">';
 
 		// Need the class file.
 		require_once ABSPATH . 'wp-includes/class-wp-editor.php';
-		add_action( 'wp_footer', function() {
-			_WP_Editors::wp_link_dialog();
-		});
+		add_action(
+			'wp_footer',
+			function() {
+				_WP_Editors::wp_link_dialog();
+			}
+		);
 
 		// Enqueue script and style.
 		wp_enqueue_script( 'wplink' );
@@ -105,20 +117,21 @@ class Poets_Poems_Switcher {
 
 		// Init localisation.
 		$localisation = [
-			'title' => __( 'Choose Featured Poem', 'poets-poems' ),
+			'title'  => __( 'Choose Featured Poem', 'poets-poems' ),
 			'button' => __( 'Set Featured Poem', 'poets-poems' ),
 		];
 
-		/// Init settings.
+		// Init settings.
 		$settings = [
-			'ajax_url' => admin_url( 'admin-ajax.php' ),
-			'loading' => POETS_POEMS_URL . 'assets/images/loading.gif',
+			'ajax_url'   => admin_url( 'admin-ajax.php' ),
+			'ajax_nonce' => wp_create_nonce( $this->nonce_action ),
+			'loading'    => POETS_POEMS_URL . 'assets/images/loading.gif',
 		];
 
 		// Localisation array.
 		$vars = [
 			'localisation' => $localisation,
-			'settings' => $settings,
+			'settings'     => $settings,
 		];
 
 		// Localise the WordPress way.
@@ -131,7 +144,7 @@ class Poets_Poems_Switcher {
 	}
 
 	/**
-	 * Filter the post types in the Poem switcher.
+	 * Filter the Post Types in the Poem switcher.
 	 *
 	 * @since 0.2.1
 	 *
@@ -142,7 +155,7 @@ class Poets_Poems_Switcher {
 
 		// Only on homepage.
 		$referrer = isset( $_SERVER['HTTP_REFERER'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_REFERER'] ) ) : '';
-		if ( $referrer !== trailingslashit( site_url() ) ) {
+		if ( trailingslashit( site_url() ) !== $referrer ) {
 			return $query;
 		}
 
@@ -167,7 +180,7 @@ class Poets_Poems_Switcher {
 
 		// Only on homepage.
 		$referrer = isset( $_SERVER['HTTP_REFERER'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_REFERER'] ) ) : '';
-		if ( $referrer !== trailingslashit( site_url() ) ) {
+		if ( trailingslashit( site_url() ) !== $referrer ) {
 			return $results;
 		}
 
@@ -193,43 +206,36 @@ class Poets_Poems_Switcher {
 			'success' => 'false',
 		];
 
+		// Since this is an AJAX request, check security.
+		$result = check_ajax_referer( $this->nonce_action, false, false );
+		if ( false === $result ) {
+			wp_send_json( $data );
+		}
+
 		// Only allow requests from homepage.
 		$referrer = isset( $_SERVER['HTTP_REFERER'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_REFERER'] ) ) : '';
-		if ( $referrer !== trailingslashit( site_url() ) ) {
-			return $data;
+		if ( trailingslashit( site_url() ) !== $referrer ) {
+			wp_send_json( $data );
 		}
 
 		// Bail if not at least editor.
 		if ( ! current_user_can( 'edit_posts' ) ) {
-			return $data;
+			wp_send_json( $data );
 		}
 
-		// Get post ID.
+		// Get Post ID.
 		$post_id = isset( $_POST['post_id'] ) ? sanitize_text_field( wp_unslash( $_POST['post_id'] ) ) : 0;
 
 		// Sanity checks.
 		if ( ! is_numeric( $post_id ) ) {
-			return $data;
+			wp_send_json( $data );
 		}
-		if ( $post_id === 0 ) {
-			return $data;
+		if ( 0 === (int) $post_id ) {
+			wp_send_json( $data );
 		}
 
 		// Cast as integer.
 		$post_id = (int) $post_id;
-
-		/*
-		// Logging.
-		$e = new \Exception();
-		$trace = $e->getTraceAsString();
-		error_log( print_r( [
-			'method' => __METHOD__,
-			'POST' => $_POST,
-			'post_id' => $post_id,
-			'data' => $data,
-			//'backtrace' => $trace,
-		], true ) );
-		*/
 
 		// Remove all featured Poems.
 		$this->featured_poem_unset();
@@ -253,9 +259,7 @@ class Poets_Poems_Switcher {
 		$data['success'] = 'true';
 
 		// Send data to browser.
-		if ( wp_doing_ajax() ) {
-			wp_send_json( $data );
-		}
+		wp_send_json( $data );
 
 	}
 
@@ -268,13 +272,13 @@ class Poets_Poems_Switcher {
 
 		// Define args for query.
 		$query_args = [
-			'post_type' => $this->plugin->cpt->post_type_name,
-			'post_status' => 'publish',
+			'post_type'      => $this->plugin->cpt->post_type_name,
+			'post_status'    => 'publish',
 			'posts_per_page' => '1',
-			'orderby' => 'date',
-			'order' => 'DESC',
+			'orderby'        => 'date',
+			'order'          => 'DESC',
 			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
-			'tax_query' => [
+			'tax_query'      => [
 				[
 					'taxonomy' => $this->plugin->cpt->taxonomy_cat_name,
 					'field'    => 'slug',
@@ -297,7 +301,7 @@ class Poets_Poems_Switcher {
 
 		}
 
-		// Reset the post globals as this query will have stomped on it.
+		// Reset the Post globals as this query will have stomped on it.
 		wp_reset_postdata();
 
 	}
@@ -311,13 +315,13 @@ class Poets_Poems_Switcher {
 
 		// Define args for query.
 		$query_args = [
-			'post_type' => $this->plugin->cpt->post_type_name,
-			'post_status' => 'publish',
+			'post_type'      => $this->plugin->cpt->post_type_name,
+			'post_status'    => 'publish',
 			'posts_per_page' => '1',
-			'orderby' => 'date',
-			'order' => 'DESC',
+			'orderby'        => 'date',
+			'order'          => 'DESC',
 			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
-			'tax_query' => [
+			'tax_query'      => [
 				[
 					'taxonomy' => $this->plugin->cpt->taxonomy_cat_name,
 					'field'    => 'slug',
@@ -349,6 +353,7 @@ class Poets_Poems_Switcher {
 						if ( ! empty( $post->poets ) ) {
 							foreach ( $post->poets as $poet ) {
 								$link = '<a href="' . esc_url( get_permalink( $poet ) ) . '">' . get_the_title( $poet ) . '</a>';
+								// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 								echo '<cite class="fn post-author">' . $link . '</cite>';
 							}
 						}
@@ -363,6 +368,7 @@ class Poets_Poems_Switcher {
 
 					<p class="search_meta"><?php comments_popup_link( __( 'Be the first to leave a comment &#187;', 'poets-poems' ), __( '1 Comment &#187;', 'poets-poems' ), __( '% Comments &#187;', 'poets-poems' ) ); ?></p>
 
+					<?php /* phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped */ ?>
 					<?php echo $this->notes(); ?>
 				</div>
 
@@ -370,10 +376,9 @@ class Poets_Poems_Switcher {
 
 			endwhile;
 
-			// Reset the post globals as this query will have stomped on it.
+			// Reset the Post globals as this query will have stomped on it.
 			wp_reset_postdata();
 
-		// End check for Poems.
 		endif;
 
 	}
@@ -394,16 +399,16 @@ class Poets_Poems_Switcher {
 		$key = '_poets_poems_content_notes';
 
 		// Get value if the custom field has one.
-		$notes = '';
+		$notes    = '';
 		$existing = get_post_meta( get_the_ID(), $key, true );
 		if ( false !== $existing ) {
-			$notes = get_post_meta( get_the_ID(), $key, true );
+			$notes = $existing;
 		}
 
 		// Maybe show content.
 		if ( ! empty( $notes ) ) {
 			$markup .= '<div class="poem_meta">' . "\n";
-			$markup .= '<h4>' . __( 'Notes', 'poets-poems' ) . '</h4>' . "\n";
+			$markup .= '<h4>' . esc_html__( 'Notes', 'poets-poems' ) . '</h4>' . "\n";
 			$markup .= '<div class="poem_content_notes">' . "\n";
 			$markup .= apply_filters( 'commentpress_poets_richtext_content', $notes ) . "\n";
 			$markup .= '</div>' . "\n";
@@ -420,8 +425,8 @@ class Poets_Poems_Switcher {
 	 *
 	 * @since 0.2.1
 	 *
-	 * @param str $content The existing post content.
-	 * @return str $content The modified post content.
+	 * @param str $content The existing Post content.
+	 * @return str $content The modified Post content.
 	 */
 	public function featured_poem_teaser( $content ) {
 
@@ -440,7 +445,7 @@ class Poets_Poems_Switcher {
 		}
 
 		// Bail if this is not the Front Page.
-		if ( (int) $front_page_id !== (int) get_the_ID() ) {
+		if ( (int) get_the_ID() !== (int) $front_page_id ) {
 			return $content;
 		}
 
@@ -453,7 +458,7 @@ class Poets_Poems_Switcher {
 		$teaser = $this->get_teaser_markup();
 
 		// Bail if there isn't one.
-		if ( $teaser === false ) {
+		if ( false === $teaser ) {
 			return $content;
 		}
 
@@ -481,7 +486,7 @@ class Poets_Poems_Switcher {
 		$poem = poets_poems_get_featured();
 
 		// Bail if there isn't one.
-		if ( $poem === false ) {
+		if ( false === $poem ) {
 			return false;
 		}
 
@@ -489,7 +494,7 @@ class Poets_Poems_Switcher {
 		$poet = poets_poems_get_poet( $poem );
 
 		// Bail if there isn't one.
-		if ( $poet === false ) {
+		if ( false === $poet ) {
 			return false;
 		}
 

@@ -53,13 +53,13 @@ class Poets_Poems_Widget_Featured extends WP_Widget {
 
 		// Define args for query.
 		$query_args = [
-			'post_type' => $poets_poems->cpt->post_type_name,
-			'post_status' => 'publish',
+			'post_type'      => $poets_poems->cpt->post_type_name,
+			'post_status'    => 'publish',
 			'posts_per_page' => '1',
-			'orderby' => 'date',
-			'order' => 'DESC',
+			'orderby'        => 'date',
+			'order'          => 'DESC',
 			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
-			'tax_query' => [
+			'tax_query'      => [
 				[
 					'taxonomy' => $poets_poems->cpt->taxonomy_cat_name,
 					'field'    => 'slug',
@@ -87,15 +87,19 @@ class Poets_Poems_Widget_Featured extends WP_Widget {
 			ob_end_clean();
 
 			// Show before.
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo $args['before_widget'];
 
 			// If we have a title, show it.
 			if ( ! empty( $title ) ) {
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				echo $args['before_title'] . $title . $args['after_title'];
 			}
 
 			while ( $poems->have_posts() ) :
-				$poems->the_post(); ?>
+				$poems->the_post();
+
+				?>
 
 				<div id="post-<?php the_ID(); ?>" class="post">
 					<div class="post-inner">
@@ -107,6 +111,7 @@ class Poets_Poems_Widget_Featured extends WP_Widget {
 							if ( ! empty( $post->poets ) ) {
 								foreach ( $post->poets as $poet ) {
 									$link = '<a href="' . esc_url( get_permalink( $poet ) ) . '">' . get_the_title( $poet ) . '</a>';
+									// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 									echo '<cite class="fn post-author">' . $link . '</cite>';
 								}
 							}
@@ -121,20 +126,22 @@ class Poets_Poems_Widget_Featured extends WP_Widget {
 
 						<p class="search_meta"><?php comments_popup_link( __( 'Be the first to leave a comment &#187;', 'poets-poems' ), __( '1 Comment &#187;', 'poets-poems' ), __( '% Comments &#187;', 'poets-poems' ) ); ?></p>
 
+						<?php /* phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped */ ?>
 						<?php echo $this->notes(); ?>
 					</div>
 				</div>
 
-			<?php
+				<?php
+
 			endwhile;
 
 			// Show after.
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo $args['after_widget'];
 
-			// Reset the post globals as this query will have stomped on it.
+			// Reset the Post globals as this query will have stomped on it.
 			wp_reset_postdata();
 
-		// End check for Poems.
 		endif;
 
 	}
@@ -160,8 +167,8 @@ class Poets_Poems_Widget_Featured extends WP_Widget {
 		?>
 
 		<p>
-		<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php esc_html_e( 'Title:', 'poets-poems' ); ?></label>
-		<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
+		<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title:', 'poets-poems' ); ?></label>
+		<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
 		</p>
 
 		<?php
@@ -205,7 +212,7 @@ class Poets_Poems_Widget_Featured extends WP_Widget {
 		$key = '_poets_poems_content_notes';
 
 		// Get value if the custom field has one.
-		$notes = '';
+		$notes    = '';
 		$existing = get_post_meta( get_the_ID(), $key, true );
 		if ( false !== $existing ) {
 			$notes = get_post_meta( get_the_ID(), $key, true );

@@ -24,7 +24,7 @@ class Poets_Poems_Metaboxes {
 	 *
 	 * @since 0.1
 	 * @access public
-	 * @var object $cpt The name of the Custom Post Type.
+	 * @var string
 	 */
 	public $post_type_name = 'poem';
 
@@ -33,7 +33,7 @@ class Poets_Poems_Metaboxes {
 	 *
 	 * @since 0.1
 	 * @access public
-	 * @var str The Original database ID meta key.
+	 * @var string
 	 */
 	public $original_id_meta_key = 'poets_poems_original_id';
 
@@ -42,7 +42,7 @@ class Poets_Poems_Metaboxes {
 	 *
 	 * @since 0.1
 	 * @access public
-	 * @var str The Author Name meta key.
+	 * @var string
 	 */
 	public $author_name_meta_key = 'poets_poems_author_name';
 
@@ -51,7 +51,7 @@ class Poets_Poems_Metaboxes {
 	 *
 	 * @since 0.1
 	 * @access public
-	 * @var str The Author Email meta key.
+	 * @var string
 	 */
 	public $author_email_meta_key = 'poets_poems_author_email';
 
@@ -60,7 +60,7 @@ class Poets_Poems_Metaboxes {
 	 *
 	 * @since 0.1
 	 * @access public
-	 * @var str The Copyright meta key.
+	 * @var string
 	 */
 	public $author_copyright_meta_key = 'poets_poems_author_copyright';
 
@@ -69,7 +69,7 @@ class Poets_Poems_Metaboxes {
 	 *
 	 * @since 0.1
 	 * @access public
-	 * @var str The Notes meta key.
+	 * @var string
 	 */
 	public $content_notes_meta_key = 'poets_poems_content_notes';
 
@@ -78,7 +78,7 @@ class Poets_Poems_Metaboxes {
 	 *
 	 * @since 0.1
 	 * @access public
-	 * @var str The Admin Review meta key.
+	 * @var string
 	 */
 	public $admin_review_meta_key = 'poets_poems_admin_review';
 
@@ -87,7 +87,7 @@ class Poets_Poems_Metaboxes {
 	 *
 	 * @since 0.1
 	 * @access public
-	 * @var str The School Name meta key.
+	 * @var string
 	 */
 	public $school_name_meta_key = 'poets_poems_school_name';
 
@@ -96,7 +96,7 @@ class Poets_Poems_Metaboxes {
 	 *
 	 * @since 0.1
 	 * @access public
-	 * @var str The School Teacher Name meta key.
+	 * @var string
 	 */
 	public $school_teacher_name_meta_key = 'poets_poems_school_teacher_name';
 
@@ -105,7 +105,7 @@ class Poets_Poems_Metaboxes {
 	 *
 	 * @since 0.1
 	 * @access public
-	 * @var str The School Teacher Email meta key.
+	 * @var string
 	 */
 	public $school_teacher_email_meta_key = 'poets_poems_school_teacher_email';
 
@@ -114,7 +114,7 @@ class Poets_Poems_Metaboxes {
 	 *
 	 * @since 0.1
 	 * @access public
-	 * @var str The Competition Name meta key.
+	 * @var string
 	 */
 	public $competition_name_meta_key = 'poets_poems_competition_name';
 
@@ -212,7 +212,7 @@ class Poets_Poems_Metaboxes {
 	 *
 	 * @since 0.1
 	 *
-	 * @param WP_Post $post The object for the current post/page.
+	 * @param WP_Post $post The object for the current Post/Page.
 	 */
 	public function metabox_legacy( $post ) {
 
@@ -221,7 +221,7 @@ class Poets_Poems_Metaboxes {
 
 		// Show original ID.
 		/* translators: %s: The original database ID. */
-		echo '<p>' . sprintf( __( 'Original database ID: %d', 'poets-poems' ), (int) $val ) . '</p>';
+		echo '<p>' . sprintf( esc_html__( 'Original database ID: %d', 'poets-poems' ), (int) $val ) . '</p>';
 
 	}
 
@@ -230,7 +230,7 @@ class Poets_Poems_Metaboxes {
 	 *
 	 * @since 0.1
 	 *
-	 * @param WP_Post $post The object for the current post/page.
+	 * @param WP_Post $post The object for the current Post/Page.
 	 */
 	public function metabox_author( $post ) {
 
@@ -241,19 +241,19 @@ class Poets_Poems_Metaboxes {
 		$val = $this->get_meta( $post, '_' . $this->author_name_meta_key );
 
 		// Show author name in a text field.
-		echo '<p><label for="' . $this->author_name_meta_key . '">' . __( 'Author Name', 'poets-poems' ) . '<br><input type="text" id="' . $this->author_name_meta_key . '" name="' . $this->author_name_meta_key . '" value="' . $val . '" /></label></p>';
+		echo '<p><label for="' . esc_attr( $this->author_name_meta_key ) . '">' . esc_html__( 'Author Name', 'poets-poems' ) . '<br><input type="text" id="' . esc_attr( $this->author_name_meta_key ) . '" name="' . esc_attr( $this->author_name_meta_key ) . '" value="' . esc_attr( $val ) . '" /></label></p>';
 
 		// Get value for author email key.
 		$val = $this->get_meta( $post, '_' . $this->author_email_meta_key );
 
 		// Show author email in a text field.
-		echo '<p><label for="' . $this->author_email_meta_key . '">' . __( 'Author Email', 'poets-poems' ) . '<br><input type="text" id="' . $this->author_email_meta_key . '" name="' . $this->author_email_meta_key . '" value="' . $val . '" /></label></p>';
+		echo '<p><label for="' . esc_attr( $this->author_email_meta_key ) . '">' . esc_html__( 'Author Email', 'poets-poems' ) . '<br><input type="text" id="' . esc_attr( $this->author_email_meta_key ) . '" name="' . esc_attr( $this->author_email_meta_key ) . '" value="' . esc_attr( $val ) . '" /></label></p>';
 
 		// Get value for copyright key.
 		$val = $this->get_meta( $post, '_' . $this->author_copyright_meta_key );
 
 		// Show copyright in a text field.
-		echo '<p><label for="' . $this->author_name_meta_key . '">' . __( 'Copyright', 'poets-poems' ) . '<br><input type="text" id="' . $this->author_copyright_meta_key . '" name="' . $this->author_copyright_meta_key . '" value="' . $val . '" /></label></p>';
+		echo '<p><label for="' . esc_attr( $this->author_name_meta_key ) . '">' . esc_html__( 'Copyright', 'poets-poems' ) . '<br><input type="text" id="' . esc_attr( $this->author_copyright_meta_key ) . '" name="' . esc_attr( $this->author_copyright_meta_key ) . '" value="' . esc_attr( $val ) . '" /></label></p>';
 
 	}
 
@@ -262,7 +262,7 @@ class Poets_Poems_Metaboxes {
 	 *
 	 * @since 0.1
 	 *
-	 * @param WP_Post $post The object for the current post/page.
+	 * @param WP_Post $post The object for the current Post/Page.
 	 */
 	public function metabox_content( $post ) {
 
@@ -288,7 +288,7 @@ class Poets_Poems_Metaboxes {
 	 *
 	 * @since 0.1
 	 *
-	 * @param WP_Post $post The object for the current post/page.
+	 * @param WP_Post $post The object for the current Post/Page.
 	 */
 	public function metabox_admin( $post ) {
 
@@ -310,11 +310,11 @@ class Poets_Poems_Metaboxes {
 	}
 
 	/**
-	 * Adds an school info meta box to CPT edit screens.
+	 * Adds a school info meta box to CPT edit screens.
 	 *
 	 * @since 0.1
 	 *
-	 * @param WP_Post $post The object for the current post/page.
+	 * @param WP_Post $post The object for the current Post/Page.
 	 */
 	public function metabox_school( $post ) {
 
@@ -325,19 +325,19 @@ class Poets_Poems_Metaboxes {
 		$val = $this->get_meta( $post, '_' . $this->school_name_meta_key );
 
 		// Show school name in a text field.
-		echo '<p><label for="' . $this->school_name_meta_key . '">' . __( 'School Name', 'poets-poems' ) . '<br><input type="text" id="' . $this->school_name_meta_key . '" name="' . $this->school_name_meta_key . '" value="' . $val . '" class="regular-text" /></label></p>';
+		echo '<p><label for="' . esc_attr( $this->school_name_meta_key ) . '">' . esc_html__( 'School Name', 'poets-poems' ) . '<br><input type="text" id="' . esc_attr( $this->school_name_meta_key ) . '" name="' . esc_attr( $this->school_name_meta_key ) . '" value="' . esc_attr( $val ) . '" class="regular-text" /></label></p>';
 
 		// Get value for school teacher name key.
 		$val = $this->get_meta( $post, '_' . $this->school_teacher_name_meta_key );
 
 		// Show school teacher name in a text field.
-		echo '<p><label for="' . $this->school_teacher_name_meta_key . '">' . __( 'Teacher Name', 'poets-poems' ) . '<br><input type="text" id="' . $this->school_teacher_name_meta_key . '" name="' . $this->school_teacher_name_meta_key . '" value="' . $val . '" class="regular-text" /></label></p>';
+		echo '<p><label for="' . esc_attr( $this->school_teacher_name_meta_key ) . '">' . esc_html__( 'Teacher Name', 'poets-poems' ) . '<br><input type="text" id="' . esc_attr( $this->school_teacher_name_meta_key ) . '" name="' . esc_attr( $this->school_teacher_name_meta_key ) . '" value="' . esc_attr( $val ) . '" class="regular-text" /></label></p>';
 
 		// Get value for school teacher email key.
 		$val = $this->get_meta( $post, '_' . $this->school_teacher_email_meta_key );
 
 		// Show school teacher email in a text field.
-		echo '<p><label for="' . $this->school_teacher_email_meta_key . '">' . __( 'Teacher Email', 'poets-poems' ) . '<br><input type="text" id="' . $this->school_teacher_email_meta_key . '" name="' . $this->school_teacher_email_meta_key . '" value="' . $val . '" class="regular-text" /></label></p>';
+		echo '<p><label for="' . esc_attr( $this->school_teacher_email_meta_key ) . '">' . esc_html__( 'Teacher Email', 'poets-poems' ) . '<br><input type="text" id="' . esc_attr( $this->school_teacher_email_meta_key ) . '" name="' . esc_attr( $this->school_teacher_email_meta_key ) . '" value="' . esc_attr( $val ) . '" class="regular-text" /></label></p>';
 
 	}
 
@@ -346,7 +346,7 @@ class Poets_Poems_Metaboxes {
 	 *
 	 * @since 0.1
 	 *
-	 * @param WP_Post $post The object for the current post/page.
+	 * @param WP_Post $post The object for the current Post/Page.
 	 */
 	public function metabox_competition( $post ) {
 
@@ -357,7 +357,7 @@ class Poets_Poems_Metaboxes {
 		$val = $this->get_meta( $post, '_' . $this->competition_name_meta_key );
 
 		// Show competition name in a text field.
-		echo '<p><label for="' . $this->competition_name_meta_key . '">' . __( 'Competition Name', 'poets-poems' ) . '<br><input type="text" id="' . $this->competition_name_meta_key . '" name="' . $this->competition_name_meta_key . '" value="' . $val . '" class="regular-text" /></label></p>';
+		echo '<p><label for="' . esc_attr( $this->competition_name_meta_key ) . '">' . esc_html__( 'Competition Name', 'poets-poems' ) . '<br><input type="text" id="' . esc_attr( $this->competition_name_meta_key ) . '" name="' . esc_attr( $this->competition_name_meta_key ) . '" value="' . esc_attr( $val ) . '" class="regular-text" /></label></p>';
 
 	}
 
@@ -366,18 +366,18 @@ class Poets_Poems_Metaboxes {
 	 *
 	 * @since 0.1
 	 *
-	 * @param integer $post_id the ID of the post or revision.
-	 * @param integer $post the post object.
+	 * @param integer $post_id The ID of the Post or revision.
+	 * @param integer $post The Post object.
 	 */
 	public function save_post( $post_id, $post ) {
 
-		// We don't use post_id because we're not interested in revisions.
+		// We don't use Post ID because we're not interested in revisions.
 		if ( ! $post ) {
 			return;
 		}
 
 		// Unhook BuddyForms attempt to update meta in WP admin.
-		if ( is_admin() && $post->post_type == $this->post_type_name ) {
+		if ( is_admin() && $post->post_type === $this->post_type_name ) {
 			remove_action( 'save_post', 'buddyforms_metabox_admin_form_metabox_save' );
 		}
 
@@ -401,15 +401,15 @@ class Poets_Poems_Metaboxes {
 	// -------------------------------------------------------------------------
 
 	/**
-	 * When a post is saved, this also saves the author metadata.
+	 * When a Post is saved, this also saves the author metadata.
 	 *
 	 * @since 0.1
 	 *
-	 * @param WP_Post $post_obj The object for the post or revision.
+	 * @param WP_Post $post_obj The object for the Post or revision.
 	 */
 	private function save_author_meta( $post_obj ) {
 
-		// If no post, kick out.
+		// If no Post, kick out.
 		if ( ! $post_obj ) {
 			return;
 		}
@@ -431,10 +431,10 @@ class Poets_Poems_Metaboxes {
 		}
 
 		// Check for revision.
-		if ( $post_obj->post_type == 'revision' ) {
+		if ( 'revision' === $post_obj->post_type ) {
 
 			// Get parent.
-			if ( $post_obj->post_parent != 0 ) {
+			if ( 0 !== (int) $post_obj->post_parent ) {
 				$post = get_post( $post_obj->post_parent );
 			} else {
 				$post = $post_obj;
@@ -444,8 +444,8 @@ class Poets_Poems_Metaboxes {
 			$post = $post_obj;
 		}
 
-		// Bail if not Poem post type.
-		if ( $post->post_type != $this->post_type_name ) {
+		// Bail if not Poem Post Type.
+		if ( $post->post_type !== $this->post_type_name ) {
 			return;
 		}
 
@@ -453,31 +453,31 @@ class Poets_Poems_Metaboxes {
 
 		// Save author name.
 		$db_key = '_' . $this->author_name_meta_key;
-		$value = isset( $_POST[ $this->author_name_meta_key ] ) ? sanitize_text_field( wp_unslash( $_POST[ $this->author_name_meta_key ] ) ) : '';
+		$value  = isset( $_POST[ $this->author_name_meta_key ] ) ? sanitize_text_field( wp_unslash( $_POST[ $this->author_name_meta_key ] ) ) : '';
 		$this->save_meta( $post, $db_key, $value );
 
 		// Save author email.
 		$db_key = '_' . $this->author_email_meta_key;
-		$value = isset( $_POST[ $this->author_email_meta_key ] ) ? sanitize_text_field( wp_unslash( $_POST[ $this->author_email_meta_key ] ) ) : '';
+		$value  = isset( $_POST[ $this->author_email_meta_key ] ) ? sanitize_text_field( wp_unslash( $_POST[ $this->author_email_meta_key ] ) ) : '';
 		$this->save_meta( $post, $db_key, $value );
 
 		// Save copyright info.
 		$db_key = '_' . $this->author_copyright_meta_key;
-		$value = isset( $_POST[ $this->author_copyright_meta_key ] ) ? sanitize_text_field( wp_unslash( $_POST[ $this->author_copyright_meta_key ] ) ) : '';
+		$value  = isset( $_POST[ $this->author_copyright_meta_key ] ) ? sanitize_text_field( wp_unslash( $_POST[ $this->author_copyright_meta_key ] ) ) : '';
 		$this->save_meta( $post, $db_key, $value );
 
 	}
 
 	/**
-	 * When a post is saved, this also saves the content metadata.
+	 * When a Post is saved, this also saves the content metadata.
 	 *
 	 * @since 0.1
 	 *
-	 * @param WP_Post $post_obj The object for the post or revision.
+	 * @param WP_Post $post_obj The object for the Post or revision.
 	 */
 	private function save_content_meta( $post_obj ) {
 
-		// If no post, kick out.
+		// If no Post, kick out.
 		if ( ! $post_obj ) {
 			return;
 		}
@@ -499,10 +499,10 @@ class Poets_Poems_Metaboxes {
 		}
 
 		// Check for revision.
-		if ( $post_obj->post_type == 'revision' ) {
+		if ( 'revision' === $post_obj->post_type ) {
 
 			// Get parent.
-			if ( $post_obj->post_parent != 0 ) {
+			if ( 0 !== (int) $post_obj->post_parent ) {
 				$post = get_post( $post_obj->post_parent );
 			} else {
 				$post = $post_obj;
@@ -512,8 +512,8 @@ class Poets_Poems_Metaboxes {
 			$post = $post_obj;
 		}
 
-		// Bail if not Poem post type.
-		if ( $post->post_type != $this->post_type_name ) {
+		// Bail if not Poem Post Type.
+		if ( $post->post_type !== $this->post_type_name ) {
 			return;
 		}
 
@@ -521,21 +521,21 @@ class Poets_Poems_Metaboxes {
 
 		// Save notes.
 		$db_key = '_' . $this->content_notes_meta_key;
-		$value = isset( $_POST[ $this->content_notes_meta_key ] ) ? sanitize_textarea_field( wp_unslash( $_POST[ $this->content_notes_meta_key ] ) ) : '';
+		$value  = isset( $_POST[ $this->content_notes_meta_key ] ) ? sanitize_textarea_field( wp_unslash( $_POST[ $this->content_notes_meta_key ] ) ) : '';
 		$this->save_meta( $post, $db_key, $value );
 
 	}
 
 	/**
-	 * When a post is saved, this also saves the admin metadata.
+	 * When a Post is saved, this also saves the admin metadata.
 	 *
 	 * @since 0.1
 	 *
-	 * @param WP_Post $post_obj The object for the post or revision.
+	 * @param WP_Post $post_obj The object for the Post or revision.
 	 */
 	private function save_admin_meta( $post_obj ) {
 
-		// If no post, kick out.
+		// If no Post, kick out.
 		if ( ! $post_obj ) {
 			return;
 		}
@@ -557,10 +557,10 @@ class Poets_Poems_Metaboxes {
 		}
 
 		// Check for revision.
-		if ( $post_obj->post_type == 'revision' ) {
+		if ( 'revision' === $post_obj->post_type ) {
 
 			// Get parent.
-			if ( $post_obj->post_parent != 0 ) {
+			if ( 0 !== (int) $post_obj->post_parent ) {
 				$post = get_post( $post_obj->post_parent );
 			} else {
 				$post = $post_obj;
@@ -570,8 +570,8 @@ class Poets_Poems_Metaboxes {
 			$post = $post_obj;
 		}
 
-		// Bail if not Poem post type.
-		if ( $post->post_type != $this->post_type_name ) {
+		// Bail if not Poem Post Type.
+		if ( $post->post_type !== $this->post_type_name ) {
 			return;
 		}
 
@@ -579,21 +579,21 @@ class Poets_Poems_Metaboxes {
 
 		// Save notes.
 		$db_key = '_' . $this->admin_review_meta_key;
-		$value = isset( $_POST[ $this->admin_review_meta_key ] ) ? sanitize_text_field( wp_unslash( $_POST[ $this->admin_review_meta_key ] ) ) : '';
+		$value  = isset( $_POST[ $this->admin_review_meta_key ] ) ? sanitize_text_field( wp_unslash( $_POST[ $this->admin_review_meta_key ] ) ) : '';
 		$this->save_meta( $post, $db_key, $value );
 
 	}
 
 	/**
-	 * When a post is saved, this also saves the school metadata.
+	 * When a Post is saved, this also saves the school metadata.
 	 *
 	 * @since 0.1
 	 *
-	 * @param WP_Post $post_obj The object for the post or revision.
+	 * @param WP_Post $post_obj The object for the Post or revision.
 	 */
 	private function save_school_meta( $post_obj ) {
 
-		// If no post, kick out.
+		// If no Post, kick out.
 		if ( ! $post_obj ) {
 			return;
 		}
@@ -615,10 +615,10 @@ class Poets_Poems_Metaboxes {
 		}
 
 		// Check for revision.
-		if ( $post_obj->post_type == 'revision' ) {
+		if ( 'revision' === $post_obj->post_type ) {
 
 			// Get parent.
-			if ( $post_obj->post_parent != 0 ) {
+			if ( 0 !== (int) $post_obj->post_parent ) {
 				$post = get_post( $post_obj->post_parent );
 			} else {
 				$post = $post_obj;
@@ -628,8 +628,8 @@ class Poets_Poems_Metaboxes {
 			$post = $post_obj;
 		}
 
-		// Bail if not Poem post type.
-		if ( $post->post_type != $this->post_type_name ) {
+		// Bail if not Poem Post Type.
+		if ( $post->post_type !== $this->post_type_name ) {
 			return;
 		}
 
@@ -637,31 +637,31 @@ class Poets_Poems_Metaboxes {
 
 		// Save school name.
 		$db_key = '_' . $this->school_name_meta_key;
-		$value = isset( $_POST[ $this->school_name_meta_key ] ) ? sanitize_text_field( wp_unslash( $_POST[ $this->school_name_meta_key ] ) ) : '';
+		$value  = isset( $_POST[ $this->school_name_meta_key ] ) ? sanitize_text_field( wp_unslash( $_POST[ $this->school_name_meta_key ] ) ) : '';
 		$this->save_meta( $post, $db_key, $value );
 
 		// Save school teacher email.
 		$db_key = '_' . $this->school_teacher_name_meta_key;
-		$value = isset( $_POST[ $this->school_teacher_name_meta_key ] ) ? sanitize_text_field( wp_unslash( $_POST[ $this->school_teacher_name_meta_key ] ) ) : '';
+		$value  = isset( $_POST[ $this->school_teacher_name_meta_key ] ) ? sanitize_text_field( wp_unslash( $_POST[ $this->school_teacher_name_meta_key ] ) ) : '';
 		$this->save_meta( $post, $db_key, $value );
 
 		// Save copyright info.
 		$db_key = '_' . $this->school_teacher_email_meta_key;
-		$value = ( isset( $_POST[ $this->school_teacher_email_meta_key ] ) ) ? sanitize_text_field( wp_unslash( $_POST[ $this->school_teacher_email_meta_key ] ) ) : '';
+		$value  = ( isset( $_POST[ $this->school_teacher_email_meta_key ] ) ) ? sanitize_text_field( wp_unslash( $_POST[ $this->school_teacher_email_meta_key ] ) ) : '';
 		$this->save_meta( $post, $db_key, $value );
 
 	}
 
 	/**
-	 * When a post is saved, this also saves the competition metadata.
+	 * When a Post is saved, this also saves the competition metadata.
 	 *
 	 * @since 0.1
 	 *
-	 * @param WP_Post $post_obj The object for the post or revision.
+	 * @param WP_Post $post_obj The object for the Post or revision.
 	 */
 	private function save_competition_meta( $post_obj ) {
 
-		// If no post, kick out.
+		// If no Post, kick out.
 		if ( ! $post_obj ) {
 			return;
 		}
@@ -683,10 +683,10 @@ class Poets_Poems_Metaboxes {
 		}
 
 		// Check for revision.
-		if ( $post_obj->post_type == 'revision' ) {
+		if ( 'revision' === $post_obj->post_type ) {
 
 			// Get parent.
-			if ( $post_obj->post_parent != 0 ) {
+			if ( 0 !== (int) $post_obj->post_parent ) {
 				$post = get_post( $post_obj->post_parent );
 			} else {
 				$post = $post_obj;
@@ -696,8 +696,8 @@ class Poets_Poems_Metaboxes {
 			$post = $post_obj;
 		}
 
-		// Bail if not Poem post type.
-		if ( $post->post_type != $this->post_type_name ) {
+		// Bail if not Poem Post Type.
+		if ( $post->post_type !== $this->post_type_name ) {
 			return;
 		}
 
@@ -705,7 +705,7 @@ class Poets_Poems_Metaboxes {
 
 		// Save competition name.
 		$db_key = '_' . $this->competition_name_meta_key;
-		$value = isset( $_POST[ $this->competition_name_meta_key ] ) ? sanitize_text_field( wp_unslash( $_POST[ $this->competition_name_meta_key ] ) ) : '';
+		$value  = isset( $_POST[ $this->competition_name_meta_key ] ) ? sanitize_text_field( wp_unslash( $_POST[ $this->competition_name_meta_key ] ) ) : '';
 		$this->save_meta( $post, $db_key, $value );
 
 	}
@@ -715,8 +715,8 @@ class Poets_Poems_Metaboxes {
 	 *
 	 * @since 0.1
 	 *
-	 * @param WP_Post $post The WordPress post object.
-	 * @param string $key The meta key.
+	 * @param WP_Post $post The WordPress Post object.
+	 * @param string  $key The meta key.
 	 * @return mixed $data The data that was saved.
 	 */
 	private function get_meta( $post, $key ) {
@@ -740,9 +740,9 @@ class Poets_Poems_Metaboxes {
 	 *
 	 * @since 0.1
 	 *
-	 * @param WP_Post $post The WordPress post object.
-	 * @param string $key The meta key.
-	 * @param mixed $data The data to be saved.
+	 * @param WP_Post $post The WordPress Post object.
+	 * @param string  $key The meta key.
+	 * @param mixed   $data The data to be saved.
 	 * @return mixed $data The data that was saved.
 	 */
 	private function save_meta( $post, $key, $data = '' ) {

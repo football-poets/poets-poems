@@ -53,11 +53,11 @@ class Poets_Poems_Widget_Latest extends WP_Widget {
 
 		// Define args for query.
 		$query_args = [
-			'post_type' => $poets_poems->cpt->post_type_name,
-			'post_status' => 'publish',
+			'post_type'      => $poets_poems->cpt->post_type_name,
+			'post_status'    => 'publish',
 			'posts_per_page' => '10',
-			'orderby' => 'date',
-			'order' => 'DESC',
+			'orderby'        => 'date',
+			'order'          => 'DESC',
 		];
 
 		// Do query.
@@ -73,10 +73,12 @@ class Poets_Poems_Widget_Latest extends WP_Widget {
 			$title = apply_filters( 'widget_title', $instance['title'] );
 
 			// Show before.
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo $args['before_widget'];
 
 			// If we have a title, show it.
 			if ( ! empty( $title ) ) {
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				echo $args['before_title'] . $title . $args['after_title'];
 			}
 
@@ -95,7 +97,7 @@ class Poets_Poems_Widget_Latest extends WP_Widget {
 					global $post;
 					if ( ! empty( $post->poets ) ) {
 						foreach ( $post->poets as $poet ) {
-							echo '<span class="post-author">' . get_the_title( $poet ) . '</span><br>';
+							echo '<span class="post-author">' . esc_html( get_the_title( $poet ) ) . '</span><br>';
 						}
 					}
 
@@ -104,17 +106,17 @@ class Poets_Poems_Widget_Latest extends WP_Widget {
 				</li><!-- #post-## -->
 
 			<?php endwhile; ?>
-			<li class="poets-poems-archive-link"><a href="<?php echo get_post_type_archive_link( 'poem' ); ?>"><span class="entry-title"><?php esc_html_e( 'Read all recent poems', 'poets-poems' ); ?> &rarr;</span></a></li>
+			<li class="poets-poems-archive-link"><a href="<?php echo esc_url( get_post_type_archive_link( 'poem' ) ); ?>"><span class="entry-title"><?php esc_html_e( 'Read all recent poems', 'poets-poems' ); ?> &rarr;</span></a></li>
 			</ol>
 			<?php
 
 			// Show after.
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo $args['after_widget'];
 
-			// Reset the post globals as this query will have stomped on it.
+			// Reset the Post globals as this query will have stomped on it.
 			wp_reset_postdata();
 
-		// End check for Poems.
 		endif;
 
 	}
@@ -140,8 +142,8 @@ class Poets_Poems_Widget_Latest extends WP_Widget {
 		?>
 
 		<p>
-		<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php esc_html_e( 'Title:', 'poets-poems' ); ?></label>
-		<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
+		<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title:', 'poets-poems' ); ?></label>
+		<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
 		</p>
 
 		<?php

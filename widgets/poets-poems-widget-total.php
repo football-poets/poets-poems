@@ -55,17 +55,19 @@ class Poets_Poems_Widget_Total extends WP_Widget {
 		$title = apply_filters( 'widget_title', $instance['title'] );
 
 		// Show before.
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		echo $args['before_widget'];
 
 		// If we have a title, show it.
 		if ( ! empty( $title ) ) {
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo $args['before_title'] . $title . $args['after_title'];
 		}
 
 		// Define args for query.
 		$query_args = [
-			'post_type' => $poets_poems->cpt->post_type_name,
-			'post_status' => 'publish',
+			'post_type'      => $poets_poems->cpt->post_type_name,
+			'post_status'    => 'publish',
 			'posts_per_page' => '10',
 		];
 
@@ -77,20 +79,32 @@ class Poets_Poems_Widget_Total extends WP_Widget {
 			<?php
 
 			echo sprintf(
-				/* translators: %d: The number of Poems. */
-				__( 'There are currently <strong>%d</strong> poems on this site.', 'poets-poems' ),
-				$poems->found_posts
+				/* translators: %s: The number of Poems wrapped in a <strong> tag. */
+				esc_html__( 'There are currently %s poems on this site.', 'poets-poems' ),
+				'<strong>' . esc_html( $poems->found_posts ) . '</strong>'
 			);
 
 			?>
 		</p>
-		<p>Read our <a class="button" style="text-transform: uppercase" href="#poets_poems_featured-2"><?php esc_html_e( 'Featured Poem', 'poets-poems' ); ?></a></p>
+		<p>
+			<?php
+
+			echo sprintf(
+				/* translators: 1: The opening anchor tag, 2: The closing anchor tag. */
+				esc_html__( 'Read our %1$sFeatured Poem%2$s', 'poets-poems' ),
+				'<a class="button" style="text-transform: uppercase" href="#poets_poems_featured-2">',
+				'</a>'
+			);
+
+			?>
+		</p>
 		<?php
 
 		// Show after.
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		echo $args['after_widget'];
 
-		// Reset the post globals as this query will have stomped on it.
+		// Reset the Post globals as this query will have stomped on it.
 		wp_reset_postdata();
 
 	}
@@ -116,8 +130,8 @@ class Poets_Poems_Widget_Total extends WP_Widget {
 		?>
 
 		<p>
-		<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php esc_html_e( 'Title:', 'poets-poems' ); ?></label>
-		<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
+		<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title:', 'poets-poems' ); ?></label>
+		<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
 		</p>
 
 		<?php

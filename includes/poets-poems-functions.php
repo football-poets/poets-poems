@@ -24,13 +24,13 @@ function poets_poems_get_featured() {
 
 	// Define args for query.
 	$query_args = [
-		'post_type' => $poets_poems->cpt->post_type_name,
-		'post_status' => 'publish',
+		'post_type'      => $poets_poems->cpt->post_type_name,
+		'post_status'    => 'publish',
 		'posts_per_page' => '1',
-		'orderby' => 'date',
-		'order' => 'DESC',
+		'orderby'        => 'date',
+		'order'          => 'DESC',
 		// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
-		'tax_query' => [
+		'tax_query'      => [
 			[
 				'taxonomy' => $poets_poems->cpt->taxonomy_cat_name,
 				'field'    => 'slug',
@@ -68,10 +68,10 @@ function poets_poems_get_poet( $poem ) {
 
 	// Define query args.
 	$query_args = [
-		'connected_type' => 'poets_to_poems',
+		'connected_type'  => 'poets_to_poems',
 		'connected_items' => $poem,
-		'nopaging' => true,
-		'no_found_rows' => true,
+		'nopaging'        => true,
+		'no_found_rows'   => true,
 	];
 
 	// The query.
@@ -106,7 +106,7 @@ function poets_poems_get_latest() {
 	// Define args.
 	$args = [
 		'numberposts' => 1,
-		'post_type' => $poets_poems->cpt->post_type_name,
+		'post_type'   => $poets_poems->cpt->post_type_name,
 	];
 
 	// Do query.

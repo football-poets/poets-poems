@@ -24,7 +24,7 @@ class Poets_Poems_CPT {
 	 *
 	 * @since 0.1
 	 * @access public
-	 * @var object $cpt The name of the Custom Post Type.
+	 * @var string
 	 */
 	public $post_type_name = 'poem';
 
@@ -33,7 +33,7 @@ class Poets_Poems_CPT {
 	 *
 	 * @since 0.1
 	 * @access public
-	 * @var str $taxonomy_cat_name The name of the Custom Hierarchical Taxonomy.
+	 * @var string
 	 */
 	public $taxonomy_cat_name = 'poemcat';
 
@@ -42,7 +42,7 @@ class Poets_Poems_CPT {
 	 *
 	 * @since 0.1
 	 * @access public
-	 * @var str $taxonomy_tag_name The name of the Custom Free Taxonomy.
+	 * @var string
 	 */
 	public $taxonomy_tag_name = 'poemtag';
 
@@ -56,13 +56,13 @@ class Poets_Poems_CPT {
 	}
 
 	/**
-	 * Register WordPress hooks.
+	 * Register hook callbacks.
 	 *
 	 * @since 0.1
 	 */
 	public function register_hooks() {
 
-		// Always create post types.
+		// Always create Post Types.
 		add_action( 'init', [ $this, 'post_type_create' ] );
 
 		// Make sure our feedback is appropriate.
@@ -147,66 +147,66 @@ class Poets_Poems_CPT {
 		$labels = [
 
 			// WordPress.
-			'name'               => __( 'Poems', 'poets-poems' ),
-			'singular_name'      => __( 'Poem', 'poets-poems' ),
-			'add_new'            => __( 'Add New', 'poets-poems' ),
-			'add_new_item'       => __( 'Add New Poem', 'poets-poems' ),
-			'edit_item'          => __( 'Edit Poem', 'poets-poems' ),
-			'new_item'           => __( 'New Poem', 'poets-poems' ),
-			'all_items'          => __( 'All Poems', 'poets-poems' ),
-			'view_item'          => __( 'View Poem', 'poets-poems' ),
-			'search_items'       => __( 'Search Poems', 'poets-poems' ),
-			'not_found'          => __( 'No matching Poem found', 'poets-poems' ),
-			'not_found_in_trash' => __( 'No Poems found in Trash', 'poets-poems' ),
-			'menu_name'          => __( 'Poems', 'poets-poems' ),
+			'name'                              => __( 'Poems', 'poets-poems' ),
+			'singular_name'                     => __( 'Poem', 'poets-poems' ),
+			'add_new'                           => __( 'Add New', 'poets-poems' ),
+			'add_new_item'                      => __( 'Add New Poem', 'poets-poems' ),
+			'edit_item'                         => __( 'Edit Poem', 'poets-poems' ),
+			'new_item'                          => __( 'New Poem', 'poets-poems' ),
+			'all_items'                         => __( 'All Poems', 'poets-poems' ),
+			'view_item'                         => __( 'View Poem', 'poets-poems' ),
+			'search_items'                      => __( 'Search Poems', 'poets-poems' ),
+			'not_found'                         => __( 'No matching Poem found', 'poets-poems' ),
+			'not_found_in_trash'                => __( 'No Poems found in Trash', 'poets-poems' ),
+			'menu_name'                         => __( 'Poems', 'poets-poems' ),
 
 			// BuddyPress.
-			'bp_activity_admin_filter' => __( 'Published a new poem', 'poets-poems' ),
-			'bp_activity_front_filter' => __( 'Poems', 'poets-poems' ),
-			// phpcs:ignore WordPress.WP.I18n.MissingTranslatorsComment
-			'bp_activity_new_post'     => __( '%1$s published a <a href="%2$s">poem</a>', 'poets-poems' ),
-			// phpcs:ignore WordPress.WP.I18n.MissingTranslatorsComment
-			'bp_activity_new_post_ms'  => __( '%1$s published a <a href="%2$s">poem</a> on %3$s', 'poets-poems' ),
+			'bp_activity_admin_filter'          => __( 'Published a new poem', 'poets-poems' ),
+			'bp_activity_front_filter'          => __( 'Poems', 'poets-poems' ),
+			/* translators: 1: The user link, 2: The URL of the newly created post. */
+			'bp_activity_new_post'              => __( '%1$s published a <a href="%2$s">poem</a>', 'poets-poems' ),
+			/* translators: 1: The user link, 2: The URL of the newly created post, 3: The link to the site. */
+			'bp_activity_new_post_ms'           => __( '%1$s published a <a href="%2$s">poem</a> on %3$s', 'poets-poems' ),
 			'bp_activity_comments_admin_filter' => __( 'Comments on poems', 'poets-poems' ),
 			'bp_activity_comments_front_filter' => __( 'Comments on poems', 'poets-poems' ),
-			// phpcs:ignore WordPress.WP.I18n.MissingTranslatorsComment
-			'bp_activity_new_comment' => __( '%1$s commented on a <a href="%2$s">poem</a>', 'poets-poems' ),
-			// phpcs:ignore WordPress.WP.I18n.MissingTranslatorsComment
-			'bp_activity_new_comment_ms' => __( '%1$s commented on a <a href="%2$s">poem</a> on %3$s', 'poets-poems' ),
+			/* translators: 1: The user link, 2: The URL of the commented-on post. */
+			'bp_activity_new_comment'           => __( '%1$s commented on a <a href="%2$s">poem</a>', 'poets-poems' ),
+			/* translators: 1: The user link, 2: The URL of the commented-on post, 3: The link to the site. */
+			'bp_activity_new_comment_ms'        => __( '%1$s commented on a <a href="%2$s">poem</a> on %3$s', 'poets-poems' ),
 
 		];
 
-		// Set up the post type called "Poem".
-		register_post_type( $this->post_type_name, [
+		// Define Post Type.
+		$args = [
 
 			// Labels.
-			'labels' => $labels,
+			'labels'              => $labels,
 
 			// Defaults.
-			'menu_icon'   => 'dashicons-media-text',
-			'description' => __( 'A poem post type', 'poets-poems' ),
-			'public' => true,
-			'publicly_queryable' => true,
+			'menu_icon'           => 'dashicons-media-text',
+			'description'         => __( 'A poem post type', 'poets-poems' ),
+			'public'              => true,
+			'publicly_queryable'  => true,
 			'exclude_from_search' => false,
-			'show_ui' => true,
-			'show_in_nav_menus' => true,
-			'show_in_menu' => true,
-			'show_in_admin_bar' => true,
-			'has_archive' => true,
-			'query_var' => true,
-			'capability_type' => 'post',
-			'hierarchical' => false,
-			'menu_position' => 25,
-			'map_meta_cap' => true,
+			'show_ui'             => true,
+			'show_in_nav_menus'   => true,
+			'show_in_menu'        => true,
+			'show_in_admin_bar'   => true,
+			'has_archive'         => true,
+			'query_var'           => true,
+			'capability_type'     => 'post',
+			'hierarchical'        => false,
+			'menu_position'       => 25,
+			'map_meta_cap'        => true,
 
 			// Rewrite.
-			'rewrite' => [
-				'slug' => 'poems',
+			'rewrite'             => [
+				'slug'       => 'poems',
 				'with_front' => false,
 			],
 
 			// Supports.
-			'supports' => [
+			'supports'            => [
 				'title',
 				'editor',
 				'thumbnail',
@@ -216,16 +216,19 @@ class Poets_Poems_CPT {
 			],
 
 			// BuddyPress activity items.
-			'bp_activity' => [
-				'component_id'             => 'activity',
-				'action_id'                => 'new_' . $this->post_type_name,
-				'comment_action_id'        => 'new_' . $this->post_type_name . '_comment',
-				'contexts'                 => [ 'activity', 'member' ],
-				'activity_comment'         => false,
-				'position'                 => 100,
+			'bp_activity'         => [
+				'component_id'      => 'activity',
+				'action_id'         => 'new_' . $this->post_type_name,
+				'comment_action_id' => 'new_' . $this->post_type_name . '_comment',
+				'contexts'          => [ 'activity', 'member' ],
+				'activity_comment'  => false,
+				'position'          => 100,
 			],
 
-		] );
+		];
+
+		// Set up the Post Type called "Poem".
+		register_post_type( $this->post_type_name, $args );
 
 		/*
 		// Maybe flush.
@@ -238,7 +241,7 @@ class Poets_Poems_CPT {
 	}
 
 	/**
-	 * Override messages for a custom post type.
+	 * Override messages for a custom Post Type.
 	 *
 	 * @since 0.1
 	 *
@@ -250,27 +253,27 @@ class Poets_Poems_CPT {
 		// Access relevant globals.
 		global $post, $post_ID;
 
-		// Define custom messages for our custom post type.
+		// Define custom messages for our custom Post Type.
 		$messages[ $this->post_type_name ] = [
 
 			// Unused - messages start at index 1.
-			0 => '',
+			0  => '',
 
 			// Item updated.
-			1 => sprintf(
+			1  => sprintf(
 				/* translators: %s: The URL of the Post. */
 				__( 'Poem updated. <a href="%s">View poem</a>', 'poets-poems' ),
 				esc_url( get_permalink( $post_ID ) )
 			),
 
 			// Custom fields.
-			2 => __( 'Custom field updated.', 'poets-poems' ),
-			3 => __( 'Custom field deleted.', 'poets-poems' ),
-			4 => __( 'Poem updated.', 'poets-poems' ),
+			2  => __( 'Custom field updated.', 'poets-poems' ),
+			3  => __( 'Custom field deleted.', 'poets-poems' ),
+			4  => __( 'Poem updated.', 'poets-poems' ),
 
 			// Item restored to a revision.
 			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			5 => isset( $_GET['revision'] ) ?
+			5  => isset( $_GET['revision'] ) ?
 
 					// Revision text.
 					sprintf(
@@ -284,29 +287,28 @@ class Poets_Poems_CPT {
 					false,
 
 			// Item published.
-			6 => sprintf(
+			6  => sprintf(
 				/* translators: %s: The URL of the Poem. */
 				__( 'Poem published. <a href="%s">View poem</a>', 'poets-poems' ),
 				esc_url( get_permalink( $post_ID ) )
 			),
 
 			// Item saved.
-			7 => __( 'Poem saved.', 'poets-poems' ),
+			7  => __( 'Poem saved.', 'poets-poems' ),
 
 			// Item submitted.
-			8 => sprintf(
+			8  => sprintf(
 				/* translators: %s: The preview URL. */
 				__( 'Poem submitted. <a target="_blank" href="%s">Preview poem</a>', 'poets-poems' ),
 				esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_ID ) ) )
 			),
 
 			// Item scheduled.
-			9 => sprintf(
+			9  => sprintf(
 				/* translators: 1: The Post date, 2: The permalink. */
 				__( 'Poem scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview poem</a>', 'poets-poems' ),
 				/* translators: Publish box date format, see https://php.net/date */
-				date_i18n( __( 'M j, Y @ G:i', 'poets-poems' ),
-				strtotime( $post->post_date ) ),
+				date_i18n( __( 'M j, Y @ G:i', 'poets-poems' ), strtotime( $post->post_date ) ),
 				esc_url( get_permalink( $post_ID ) )
 			),
 
@@ -343,10 +345,10 @@ class Poets_Poems_CPT {
 		$arguments = [
 
 			// Same as "category".
-			'hierarchical' => true,
+			'hierarchical'      => true,
 
 			// Labels.
-			'labels' => [
+			'labels'            => [
 				'name'              => _x( 'Poem Types', 'taxonomy general name', 'poets-poems' ),
 				'singular_name'     => _x( 'Poem Type', 'taxonomy singular name', 'poets-poems' ),
 				'search_items'      => __( 'Search Poem Types', 'poets-poems' ),
@@ -361,13 +363,13 @@ class Poets_Poems_CPT {
 			],
 
 			// Rewrite rules.
-			'rewrite' => [
+			'rewrite'           => [
 				'slug' => 'poem-types',
 			],
 
 			// Show column in wp-admin.
 			'show_admin_column' => true,
-			'show_ui' => true,
+			'show_ui'           => true,
 
 		];
 
@@ -385,7 +387,7 @@ class Poets_Poems_CPT {
 			'hierarchical' => false,
 
 			// Labels.
-			'labels' => [
+			'labels'       => [
 				'name'              => _x( 'Poem Tags', 'taxonomy general name', 'poets-poems' ),
 				'singular_name'     => _x( 'Poem Tag', 'taxonomy singular name', 'poets-poems' ),
 				'search_items'      => __( 'Search Poem Tags', 'poets-poems' ),
@@ -400,7 +402,7 @@ class Poets_Poems_CPT {
 			],
 
 			// Rewrite rules.
-			'rewrite' => [
+			'rewrite'      => [
 				'slug' => 'poem-tags',
 			],
 
@@ -437,12 +439,12 @@ class Poets_Poems_CPT {
 	 * @since 0.1
 	 *
 	 * @param array $args The existing arguments.
-	 * @param int $post_id The WordPress post ID.
+	 * @param int   $post_id The WordPress Post ID.
 	 */
 	public function taxonomy_fix_metabox( $args, $post_id ) {
 
 		// If rendering metabox for our taxonomy.
-		if ( isset( $args['taxonomy'] ) && $args['taxonomy'] == $this->taxonomy_cat_name ) {
+		if ( isset( $args['taxonomy'] ) && $args['taxonomy'] === $this->taxonomy_cat_name ) {
 
 			// Setting 'checked_ontop' to false seems to fix this.
 			$args['checked_ontop'] = false;
@@ -461,11 +463,11 @@ class Poets_Poems_CPT {
 	 */
 	public function taxonomy_filter_post_type() {
 
-		// Access current post type.
+		// Access current Post Type.
 		global $typenow;
 
-		// Bail if not our post type.
-		if ( $typenow != $this->post_type_name ) {
+		// Bail if not our Post Type.
+		if ( $typenow !== $this->post_type_name ) {
 			return;
 		}
 
@@ -473,19 +475,20 @@ class Poets_Poems_CPT {
 		$taxonomy = get_taxonomy( $this->taxonomy_cat_name );
 
 		// Show a dropdown.
-		wp_dropdown_categories( [
+		$args = [
 			/* translators: %s: The name of the taxonomy. */
 			'show_option_all' => sprintf( __( 'Show All %s', 'poets-poems' ), $taxonomy->label ),
-			'taxonomy' => $this->taxonomy_cat_name,
-			'name' => $this->taxonomy_cat_name,
-			'orderby' => 'name',
+			'taxonomy'        => $this->taxonomy_cat_name,
+			'name'            => $this->taxonomy_cat_name,
+			'orderby'         => 'name',
 			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			'selected' => isset( $_GET[ $this->taxonomy_cat_name ] ) ? sanitize_text_field( wp_unslash( $_GET[ $this->taxonomy_cat_name ] ) ) : '',
-			'show_count' => true,
-			'hide_empty' => true,
-			'value_field' => 'slug',
-			'hierarchical' => 1,
-		] );
+			'selected'        => isset( $_GET[ $this->taxonomy_cat_name ] ) ? sanitize_text_field( wp_unslash( $_GET[ $this->taxonomy_cat_name ] ) ) : '',
+			'show_count'      => true,
+			'hide_empty'      => true,
+			'value_field'     => 'slug',
+			'hierarchical'    => 1,
+		];
+		wp_dropdown_categories( $args );
 
 	}
 
@@ -503,7 +506,7 @@ class Poets_Poems_CPT {
 	public function filter_block_name( $block_name, $block_type ) {
 
 		// Override block identifier.
-		if ( $block_type == 'tag' && $this->post_type_name == get_post_type() ) {
+		if ( 'tag' === $block_type && get_post_type() === $this->post_type_name ) {
 			$block_name = __( 'verse', 'poets-poems' );
 		}
 
@@ -522,13 +525,13 @@ class Poets_Poems_CPT {
 	public function filter_post_activity( $activity ) {
 
 		// Only on new Poems.
-		if ( $activity->type != 'new_' . $this->post_type_name ) {
+		if ( 'new_' . $this->post_type_name !== $activity->type ) {
 			return $activity;
 		}
 
 		// Get Poem.
 		$poem_id = $activity->secondary_item_id;
-		$poem = get_post( $poem_id );
+		$poem    = get_post( $poem_id );
 
 		// Replace the primary link.
 		$activity->primary_link = get_permalink( $poem->ID );
@@ -540,27 +543,16 @@ class Poets_Poems_CPT {
 	 *
 	 * @since 0.2
 	 *
-	 * @param str $action The existing action string.
+	 * @param str    $action The existing action string.
 	 * @param object $activity The existing activity object.
 	 * @return str $action The modified action string.
 	 */
 	public function filter_post_activity_action( $action, $activity ) {
 
 		// Only on new Poems.
-		if ( ( $activity->type != 'new_' . $this->post_type_name ) ) {
+		if ( ( 'new_' . $this->post_type_name !== $activity->type ) ) {
 			return $action;
 		}
-
-		/*
-		// Logging.
-		$e = new \Exception();
-		$trace = $e->getTraceAsString();
-		error_log( print_r( [
-			'method' => __METHOD__,
-			'activity before' => $activity,
-			//'backtrace' => $trace,
-		], true ) );
-		*/
 
 		// Get Poem ID.
 		$poem_id = $activity->secondary_item_id;
@@ -575,11 +567,11 @@ class Poets_Poems_CPT {
 		if ( is_array( $poets ) && count( $poets ) > 0 ) {
 
 			// If we got just one.
-			if ( count( $poets ) == 1 ) {
+			if ( count( $poets ) === 1 ) {
 
 				// Construct author link.
 				foreach ( $poets as $poet ) {
-					$link = esc_url( get_permalink( $poet->ID ) );
+					$link   = esc_url( get_permalink( $poet->ID ) );
 					$author = '<a href="' . $link . '">' . get_the_title( $poet->ID ) . '</a>';
 				}
 
@@ -600,17 +592,17 @@ class Poets_Poems_CPT {
 					$sep = ', ';
 
 					// Use ampersand if we're on the penultimate.
-					if ( $n == ( $author_count - 1 ) ) {
+					if ( ( $author_count - 1 ) === $n ) {
 						$sep = ' &amp; ';
 					}
 
 					// If we're on the last, don't add.
-					if ( $n == $author_count ) {
+					if ( $n === $author_count ) {
 						$sep = '';
 					}
 
 					// Construct link to Poet.
-					$link = esc_url( get_permalink( $poet->ID ) );
+					$link    = esc_url( get_permalink( $poet->ID ) );
 					$author .= '<a href="' . $link . '">' . get_the_title( $poet->ID ) . '</a>';
 
 					// Add separator.
@@ -639,17 +631,6 @@ class Poets_Poems_CPT {
 
 		}
 
-		/*
-		// Logging.
-		$e = new \Exception();
-		$trace = $e->getTraceAsString();
-		error_log( print_r( [
-			'method' => __METHOD__,
-			'activity after' => $activity,
-			//'backtrace' => $trace,
-		], true ) );
-		*/
-
 		// --<
 		return $action;
 
@@ -673,23 +654,12 @@ class Poets_Poems_CPT {
 		if ( ! isset( $query->query['post_type'] ) ) {
 			return;
 		}
-		if ( $query->query['post_type'] != $this->post_type_name ) {
+		if ( $query->query['post_type'] !== $this->post_type_name ) {
 			return;
 		}
 
-		// Set post type.
+		// Set Post Type.
 		$query->set( 'post_type', $this->post_type_name );
-
-		/*
-		// Logging.
-		$e = new \Exception();
-		$trace = $e->getTraceAsString();
-		error_log( print_r( [
-			'method' => __METHOD__,
-			'query' => $query,
-			//'backtrace' => $trace,
-		], true ) );
-		*/
 
 	}
 
@@ -711,11 +681,11 @@ class Poets_Poems_CPT {
 			return $template;
 		}
 
-		// Bail if not our post type.
+		// Bail if not our Post Type.
 		if ( ! isset( $wp_query->query['post_type'] ) ) {
 			return $template;
 		}
-		if ( $wp_query->query['post_type'] != $this->post_type_name ) {
+		if ( $wp_query->query['post_type'] !== $this->post_type_name ) {
 			return $template;
 		}
 
@@ -741,7 +711,7 @@ class Poets_Poems_CPT {
 		if ( ! is_array( $options ) ) {
 			$options = [ $this->post_type_name => $text ];
 		} else {
-			$options = [  $this->post_type_name => $text ] + $options;
+			$options = [ $this->post_type_name => $text ] + $options;
 		}
 
 		// --<
@@ -760,17 +730,20 @@ class Poets_Poems_CPT {
 			return;
 		}
 
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing
 		if ( empty( $_POST['search-terms'] ) ) {
 			bp_core_redirect( bp_get_root_domain() );
 			return;
 		}
 
 		// Get form values.
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing
 		$search_terms = sanitize_text_field( wp_unslash( $_POST['search-terms'] ) );
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing
 		$search_which = ! empty( $_POST['search-which'] ) ? sanitize_text_field( wp_unslash( $_POST['search-which'] ) ) : '';
 
 		// Is it ours?
-		if ( $search_which != $this->post_type_name ) {
+		if ( $search_which !== $this->post_type_name ) {
 			return;
 		}
 
@@ -778,7 +751,7 @@ class Poets_Poems_CPT {
 		$page = trailingslashit( home_url( '/poems' ) );
 
 		// Pass terms through.
-		$query_string = '?s=' . urlencode( $search_terms ) . '&post_type=' . $this->post_type_name;
+		$query_string = '?s=' . rawurlencode( $search_terms ) . '&post_type=' . $this->post_type_name;
 
 		// Redirect to archive.
 		bp_core_redirect( $page . $query_string );
