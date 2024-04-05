@@ -1,309 +1,424 @@
-# Copyright (C) 2022 Christian Wach
+# Copyright (C) 2024 Christian Wach
 # This file is distributed under the same license as the Football Poets Poems plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Football Poets Poems 0.2.4\n"
+"Project-Id-Version: Football Poets Poems 0.3.0a\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/poets-poems\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-11-11T21:22:41+00:00\n"
+"POT-Creation-Date: 2024-04-05T15:02:21+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.7.0\n"
+"X-Generator: WP-CLI 2.10.0\n"
 "X-Domain: poets-poems\n"
 
 #. Plugin Name of the plugin
+#: poets-poems.php
 msgid "Football Poets Poems"
 msgstr ""
 
 #. Plugin URI of the plugin
-msgid "http://footballpoets.org"
+#: poets-poems.php
+msgid "https://github.com/football-poets/poets-poems"
 msgstr ""
 
 #. Description of the plugin
+#: poets-poems.php
 msgid "Creates a \"Poems\" Custom Post Type for the Football Poets site."
 msgstr ""
 
 #. Author of the plugin
+#: poets-poems.php
 msgid "Christian Wach"
 msgstr ""
 
 #. Author URI of the plugin
+#: poets-poems.php
 msgid "https://haystack.co.uk"
 msgstr ""
 
+#: includes/poets-poems-cpt.php:150
+#: includes/poets-poems-cpt.php:161
+#: includes/poets-poems-cpt.php:165
+#: includes/poets-poems-cpt.php:708
 msgid "Poems"
 msgstr ""
 
+#: includes/poets-poems-cpt.php:151
 msgid "Poem"
 msgstr ""
 
+#: includes/poets-poems-cpt.php:152
 msgid "Add New"
 msgstr ""
 
+#: includes/poets-poems-cpt.php:153
 msgid "Add New Poem"
 msgstr ""
 
+#: includes/poets-poems-cpt.php:154
 msgid "Edit Poem"
 msgstr ""
 
+#: includes/poets-poems-cpt.php:155
 msgid "New Poem"
 msgstr ""
 
+#: includes/poets-poems-cpt.php:156
 msgid "All Poems"
 msgstr ""
 
+#: includes/poets-poems-cpt.php:157
 msgid "View Poem"
 msgstr ""
 
+#: includes/poets-poems-cpt.php:158
 msgid "Search Poems"
 msgstr ""
 
+#: includes/poets-poems-cpt.php:159
 msgid "No matching Poem found"
 msgstr ""
 
+#: includes/poets-poems-cpt.php:160
 msgid "No Poems found in Trash"
 msgstr ""
 
+#: includes/poets-poems-cpt.php:164
 msgid "Published a new poem"
 msgstr ""
 
+#. translators: 1: The user link, 2: The URL of the newly created post.
+#: includes/poets-poems-cpt.php:167
 msgid "%1$s published a <a href=\"%2$s\">poem</a>"
 msgstr ""
 
+#. translators: 1: The user link, 2: The URL of the newly created post, 3: The link to the site.
+#: includes/poets-poems-cpt.php:169
 msgid "%1$s published a <a href=\"%2$s\">poem</a> on %3$s"
 msgstr ""
 
+#: includes/poets-poems-cpt.php:170
+#: includes/poets-poems-cpt.php:171
 msgid "Comments on poems"
 msgstr ""
 
+#. translators: 1: The user link, 2: The URL of the commented-on post.
+#: includes/poets-poems-cpt.php:173
 msgid "%1$s commented on a <a href=\"%2$s\">poem</a>"
 msgstr ""
 
+#. translators: 1: The user link, 2: The URL of the commented-on post, 3: The link to the site.
+#: includes/poets-poems-cpt.php:175
 msgid "%1$s commented on a <a href=\"%2$s\">poem</a> on %3$s"
 msgstr ""
 
+#: includes/poets-poems-cpt.php:187
 msgid "A poem post type"
 msgstr ""
 
 #. translators: %s: The URL of the Post.
+#: includes/poets-poems-cpt.php:265
 msgid "Poem updated. <a href=\"%s\">View poem</a>"
 msgstr ""
 
+#: includes/poets-poems-cpt.php:270
 msgid "Custom field updated."
 msgstr ""
 
+#: includes/poets-poems-cpt.php:271
 msgid "Custom field deleted."
 msgstr ""
 
+#: includes/poets-poems-cpt.php:272
 msgid "Poem updated."
 msgstr ""
 
 #. Translators: %s: date and time of the revision.
+#: includes/poets-poems-cpt.php:281
 msgid "Poem restored to revision from %s"
 msgstr ""
 
 #. translators: %s: The URL of the Poem.
+#: includes/poets-poems-cpt.php:292
 msgid "Poem published. <a href=\"%s\">View poem</a>"
 msgstr ""
 
+#: includes/poets-poems-cpt.php:297
 msgid "Poem saved."
 msgstr ""
 
 #. translators: %s: The preview URL.
+#: includes/poets-poems-cpt.php:302
 msgid "Poem submitted. <a target=\"_blank\" href=\"%s\">Preview poem</a>"
 msgstr ""
 
 #. translators: 1: The Post date, 2: The permalink.
+#: includes/poets-poems-cpt.php:309
 msgid "Poem scheduled for: <strong>%1$s</strong>. <a target=\"_blank\" href=\"%2$s\">Preview poem</a>"
 msgstr ""
 
 #. translators: Publish box date format, see https://php.net/date
+#: includes/poets-poems-cpt.php:311
 msgid "M j, Y @ G:i"
 msgstr ""
 
 #. translators: %s: The preview URL.
+#: includes/poets-poems-cpt.php:318
 msgid "Poem draft updated. <a target=\"_blank\" href=\"%s\">Preview poem</a>"
 msgstr ""
 
+#: includes/poets-poems-cpt.php:352
 msgctxt "taxonomy general name"
 msgid "Poem Types"
 msgstr ""
 
+#: includes/poets-poems-cpt.php:353
 msgctxt "taxonomy singular name"
 msgid "Poem Type"
 msgstr ""
 
+#: includes/poets-poems-cpt.php:354
 msgid "Search Poem Types"
 msgstr ""
 
+#: includes/poets-poems-cpt.php:355
 msgid "All Poem Types"
 msgstr ""
 
+#: includes/poets-poems-cpt.php:356
 msgid "Parent Poem Type"
 msgstr ""
 
+#: includes/poets-poems-cpt.php:357
 msgid "Parent Poem Type:"
 msgstr ""
 
+#: includes/poets-poems-cpt.php:358
 msgid "Edit Poem Type"
 msgstr ""
 
+#: includes/poets-poems-cpt.php:359
 msgid "Update Poem Type"
 msgstr ""
 
+#: includes/poets-poems-cpt.php:360
 msgid "Add New Poem Type"
 msgstr ""
 
+#: includes/poets-poems-cpt.php:361
 msgid "New Poem Type Name"
 msgstr ""
 
+#: includes/poets-poems-cpt.php:362
 msgid "Poem Types"
 msgstr ""
 
+#: includes/poets-poems-cpt.php:391
 msgctxt "taxonomy general name"
 msgid "Poem Tags"
 msgstr ""
 
+#: includes/poets-poems-cpt.php:392
 msgctxt "taxonomy singular name"
 msgid "Poem Tag"
 msgstr ""
 
+#: includes/poets-poems-cpt.php:393
 msgid "Search Poem Tags"
 msgstr ""
 
+#: includes/poets-poems-cpt.php:394
 msgid "All Poem Tags"
 msgstr ""
 
+#: includes/poets-poems-cpt.php:395
 msgid "Parent Poem Tag"
 msgstr ""
 
+#: includes/poets-poems-cpt.php:396
 msgid "Parent Poem Tag:"
 msgstr ""
 
+#: includes/poets-poems-cpt.php:397
 msgid "Edit Poem Tag"
 msgstr ""
 
+#: includes/poets-poems-cpt.php:398
 msgid "Update Poem Tag"
 msgstr ""
 
+#: includes/poets-poems-cpt.php:399
 msgid "Add New Poem Tag"
 msgstr ""
 
+#: includes/poets-poems-cpt.php:400
 msgid "New Poem Tag"
 msgstr ""
 
+#: includes/poets-poems-cpt.php:401
 msgid "Poem Tags"
 msgstr ""
 
 #. translators: %s: The name of the taxonomy.
+#: includes/poets-poems-cpt.php:480
 msgid "Show All %s"
 msgstr ""
 
+#: includes/poets-poems-cpt.php:510
 msgid "verse"
 msgstr ""
 
 #. translators: 1: The name of the author, 2: The URL of the Post, 3: The name of the site.
+#: includes/poets-poems-cpt.php:626
 msgid "%1$s published a <a href=\"%2$s\">poem</a> on the site %3$s"
 msgstr ""
 
+#: includes/poets-poems-metaboxes.php:157
 msgid "Legacy Info"
 msgstr ""
 
+#: includes/poets-poems-metaboxes.php:166
 msgid "Poem Author"
 msgstr ""
 
+#: includes/poets-poems-metaboxes.php:175
 msgid "Poem Notes"
 msgstr ""
 
+#: includes/poets-poems-metaboxes.php:184
 msgid "Review Comments (not shown)"
 msgstr ""
 
+#: includes/poets-poems-metaboxes.php:193
 msgid "School Information (not shown)"
 msgstr ""
 
+#: includes/poets-poems-metaboxes.php:202
 msgid "Competition Information (not shown)"
 msgstr ""
 
 #. translators: %s: The original database ID.
+#: includes/poets-poems-metaboxes.php:224
 msgid "Original database ID: %d"
 msgstr ""
 
+#: includes/poets-poems-metaboxes.php:244
 msgid "Author Name"
 msgstr ""
 
+#: includes/poets-poems-metaboxes.php:250
 msgid "Author Email"
 msgstr ""
 
+#: includes/poets-poems-metaboxes.php:256
 msgid "Copyright"
 msgstr ""
 
+#: includes/poets-poems-metaboxes.php:328
 msgid "School Name"
 msgstr ""
 
+#: includes/poets-poems-metaboxes.php:334
 msgid "Teacher Name"
 msgstr ""
 
+#: includes/poets-poems-metaboxes.php:340
 msgid "Teacher Email"
 msgstr ""
 
+#: includes/poets-poems-metaboxes.php:360
 msgid "Competition Name"
 msgstr ""
 
+#: includes/poets-poems-switcher.php:91
 msgid "Choose New"
 msgstr ""
 
+#: includes/poets-poems-switcher.php:120
 msgid "Choose Featured Poem"
 msgstr ""
 
+#: includes/poets-poems-switcher.php:121
 msgid "Set Featured Poem"
 msgstr ""
 
+#: includes/poets-poems-switcher.php:362
+#: widgets/poets-poems-widget-featured.php:120
+#: widgets/poets-poems-widget-latest.php:105
 msgid "jS F Y"
 msgstr ""
 
+#: includes/poets-poems-switcher.php:369
+#: widgets/poets-poems-widget-featured.php:127
 msgid "Be the first to leave a comment &#187;"
 msgstr ""
 
+#: includes/poets-poems-switcher.php:369
+#: widgets/poets-poems-widget-featured.php:127
 msgid "1 Comment &#187;"
 msgstr ""
 
+#: includes/poets-poems-switcher.php:369
+#: widgets/poets-poems-widget-featured.php:127
 msgid "% Comments &#187;"
 msgstr ""
 
+#: includes/poets-poems-switcher.php:411
+#: widgets/poets-poems-widget-featured.php:224
 msgid "Notes"
 msgstr ""
 
 #. translators: 1: The title of the Poem, 2: The name of the Poet.
+#: includes/poets-poems-switcher.php:504
 msgid "Featured Poem &amp; Image: %1$s by %2$s"
 msgstr ""
 
+#: widgets/poets-poems-widget-featured.php:29
 msgid "Use this widget to show the poem in the \"Featured\" category."
 msgstr ""
 
+#: widgets/poets-poems-widget-featured.php:35
+#: widgets/poets-poems-widget-featured.php:164
 msgid "Featured Poem"
 msgstr ""
 
+#: widgets/poets-poems-widget-featured.php:170
+#: widgets/poets-poems-widget-latest.php:145
+#: widgets/poets-poems-widget-total.php:133
 msgid "Title:"
 msgstr ""
 
+#: widgets/poets-poems-widget-latest.php:29
 msgid "Use this widget to show a list of the latest poems."
 msgstr ""
 
+#: widgets/poets-poems-widget-latest.php:35
+#: widgets/poets-poems-widget-latest.php:139
 msgid "Latest Poems"
 msgstr ""
 
+#: widgets/poets-poems-widget-latest.php:109
 msgid "Read all recent poems"
 msgstr ""
 
+#: widgets/poets-poems-widget-total.php:29
 msgid "Use this widget to show the total number of poems."
 msgstr ""
 
+#: widgets/poets-poems-widget-total.php:35
+#: widgets/poets-poems-widget-total.php:127
 msgid "Total Poems"
 msgstr ""
 
-#. translators: %d: The number of Poems.
-msgid "There are currently <strong>%d</strong> poems on this site."
+#. translators: %s: The number of Poems wrapped in a <strong> tag.
+#: widgets/poets-poems-widget-total.php:83
+msgid "There are currently %s poems on this site."
+msgstr ""
+
+#. translators: 1: The opening anchor tag, 2: The closing anchor tag.
+#: widgets/poets-poems-widget-total.php:94
+msgid "Read our %1$sFeatured Poem%2$s"
 msgstr ""
