@@ -125,14 +125,45 @@ class Poets_Poems_Metaboxes {
 	 */
 	public function __construct() {
 
+		// Init when this plugin is loaded.
+		add_action( 'poets_poems/loaded', [ $this, 'initialise' ] );
+
 	}
 
 	/**
-	 * Register WordPress hooks.
+	 * Initialises this class.
+	 *
+	 * @since 0.3.1
+	 */
+	public function initialise() {
+
+		// Only do this once.
+		static $done;
+		if ( isset( $done ) && true === $done ) {
+			return;
+		}
+
+		// Bootstrap class.
+		$this->register_hooks();
+
+		/**
+		 * Broadcast that this class is now loaded.
+		 *
+		 * @since 0.3.1
+		 */
+		do_action( 'poets_poems/metaboxes/loaded' );
+
+		// We're done.
+		$done = true;
+
+	}
+
+	/**
+	 * Register hook callbacks.
 	 *
 	 * @since 0.1
 	 */
-	public function register_hooks() {
+	private function register_hooks() {
 
 		// Add meta boxes.
 		add_action( 'add_meta_boxes', [ $this, 'add_meta_boxes' ] );

@@ -172,6 +172,3 @@ class Poets_Poems_Widget_Latest extends WP_Widget {
 	}
 
 }
-
-// Register this widget.
-register_widget( 'Poets_Poems_Widget_Latest' );

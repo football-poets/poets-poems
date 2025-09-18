@@ -160,6 +160,3 @@ class Poets_Poems_Widget_Total extends WP_Widget {
 	}
 
 }
-
-// Register this widget.
-register_widget( 'Poets_Poems_Widget_Total' );

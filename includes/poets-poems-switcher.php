@@ -50,14 +50,45 @@ class Poets_Poems_Switcher {
 		// Store reference.
 		$this->plugin = $parent;
 
+		// Init when this plugin is loaded.
+		add_action( 'poets_poems/loaded', [ $this, 'initialise' ] );
+
 	}
 
 	/**
-	 * Register WordPress hooks.
+	 * Initialises this class.
+	 *
+	 * @since 0.3.1
+	 */
+	public function initialise() {
+
+		// Only do this once.
+		static $done;
+		if ( isset( $done ) && true === $done ) {
+			return;
+		}
+
+		// Bootstrap class.
+		$this->register_hooks();
+
+		/**
+		 * Broadcast that this class is now loaded.
+		 *
+		 * @since 0.3.1
+		 */
+		do_action( 'poets_poems/switcher/loaded' );
+
+		// We're done.
+		$done = true;
+
+	}
+
+	/**
+	 * Register hook callbacks.
 	 *
 	 * @since 0.2.1
 	 */
-	public function register_hooks() {
+	private function register_hooks() {
 
 		// Filter the insert/edit link modal.
 		add_filter( 'wp_link_query_args', [ $this, 'switcher_query_post_type' ] );

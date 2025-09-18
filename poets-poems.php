@@ -78,10 +78,38 @@ class Poets_Poems {
 	 */
 	public function __construct() {
 
+		// Initialise when all plugins are loaded.
+		add_action( 'plugins_loaded', [ $this, 'initialise' ] );
+
+	}
+
+	/**
+	 * Initialises this plugin.
+	 *
+	 * @since 0.3.1
+	 */
+	public function initialise() {
+
+		// Only do this once.
+		static $done;
+		if ( isset( $done ) && true === $done ) {
+			return;
+		}
+
 		// Bootstrap plugin.
 		$this->include_files();
 		$this->setup_globals();
 		$this->register_hooks();
+
+		/**
+		 * Broadcast that this plugin is now loaded.
+		 *
+		 * @since 0.3.1
+		 */
+		do_action( 'poets_poems/loaded' );
+
+		// We're done.
+		$done = true;
 
 	}
 
@@ -90,13 +118,13 @@ class Poets_Poems {
 	 *
 	 * @since 0.1
 	 */
-	public function include_files() {
+	private function include_files() {
 
 		// Include plugin files.
-		include_once POETS_POEMS_PATH . 'includes/poets-poems-cpt.php';
-		include_once POETS_POEMS_PATH . 'includes/poets-poems-metaboxes.php';
-		include_once POETS_POEMS_PATH . 'includes/poets-poems-functions.php';
-		include_once POETS_POEMS_PATH . 'includes/poets-poems-switcher.php';
+		include POETS_POEMS_PATH . 'includes/poets-poems-cpt.php';
+		include POETS_POEMS_PATH . 'includes/poets-poems-metaboxes.php';
+		include POETS_POEMS_PATH . 'includes/poets-poems-functions.php';
+		include POETS_POEMS_PATH . 'includes/poets-poems-switcher.php';
 
 	}
 
@@ -105,7 +133,7 @@ class Poets_Poems {
 	 *
 	 * @since 0.1
 	 */
-	public function setup_globals() {
+	private function setup_globals() {
 
 		// Init objects.
 		$this->cpt       = new Poets_Poems_CPT();
@@ -115,19 +143,14 @@ class Poets_Poems {
 	}
 
 	/**
-	 * Register WordPress hooks.
+	 * Register hook callbacks.
 	 *
 	 * @since 0.1
 	 */
-	public function register_hooks() {
+	private function register_hooks() {
 
 		// Use translation.
 		add_action( 'plugins_loaded', [ $this, 'translation' ] );
-
-		// Hooks that always need to be present.
-		$this->cpt->register_hooks();
-		$this->metaboxes->register_hooks();
-		$this->switcher->register_hooks();
 
 		// Add widgets.
 		add_action( 'widgets_init', [ $this, 'register_widgets' ] );
@@ -182,10 +205,24 @@ class Poets_Poems {
 	 */
 	public function register_widgets() {
 
+		// Only do this once.
+		static $done;
+		if ( isset( $done ) && true === $done ) {
+			return;
+		}
+
 		// Include widget class files.
-		require_once POETS_POEMS_PATH . 'widgets/poets-poems-widget-latest.php';
-		require_once POETS_POEMS_PATH . 'widgets/poets-poems-widget-featured.php';
-		require_once POETS_POEMS_PATH . 'widgets/poets-poems-widget-total.php';
+		require POETS_POEMS_PATH . 'widgets/poets-poems-widget-latest.php';
+		require POETS_POEMS_PATH . 'widgets/poets-poems-widget-featured.php';
+		require POETS_POEMS_PATH . 'widgets/poets-poems-widget-total.php';
+
+		// Register widgets.
+		register_widget( 'Poets_Poems_Widget_Latest' );
+		register_widget( 'Poets_Poems_Widget_Featured' );
+		register_widget( 'Poets_Poems_Widget_Total' );
+
+		// We're done.
+		$done = true;
 
 	}
 
@@ -196,14 +233,21 @@ class Poets_Poems {
  *
  * @since 0.1
  *
- * @return Poets_Poems $poets_poems The plugin object.
+ * @return Poets_Poems $plugin The plugin object.
  */
 function poets_poems() {
-	static $poets_poems;
-	if ( ! isset( $poets_poems ) ) {
-		$poets_poems = new Poets_Poems();
+
+	// Store instance in static variable.
+	static $plugin = false;
+
+	// Maybe return instance.
+	if ( false === $plugin ) {
+		$plugin = new Poets_Poems();
 	}
-	return $poets_poems;
+
+	// --<
+	return $plugin;
+
 }
 
 // Instantiate the class.
